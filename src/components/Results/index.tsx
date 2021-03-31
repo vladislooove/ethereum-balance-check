@@ -12,8 +12,7 @@ import { ResultsProps } from './types';
 import './Results.css';
 
 export const Results: FC<ResultsProps> = ({
-  balance,
-  address,
+  result,
 }) => (
   <div className="results">
     <TableContainer component={Paper}>
@@ -26,8 +25,8 @@ export const Results: FC<ResultsProps> = ({
         </TableHead>
         <TableBody>
           <TableRow>
-            <TableCell>{address}</TableCell>
-            <TableCell>{Number(balance) / 1000000000000000000} Ether</TableCell>
+            <TableCell>{result.address}</TableCell>
+            <TableCell>{Number(result.balance) / 1000000000000000000} Ether</TableCell>
           </TableRow>
         </TableBody>
       </Table>

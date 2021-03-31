@@ -8,6 +8,7 @@ import {
   Snackbar,
 } from '@material-ui/core';
 import Results from './components/Results';
+import { Result } from './components/Results/types';
 
 import './App.css';
 
@@ -16,7 +17,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [snackMessage, setSnackMessage] = useState('');
   const [isMessageShown, setIsMessageShown] = useState(false);
-  const [balance, setBalance] = useState('');
+  const [result, setResult] = useState<null | Result>(null);
 
   const onClick = async () => {
     try {
@@ -30,7 +31,10 @@ function App() {
         return;
       }
 
-      setBalance(data.result);
+      setResult({
+        address,
+        balance: data.result,
+      });
     } catch {
       setIsMessageShown(true);
       setSnackMessage('Unexpected error occured');
@@ -59,10 +63,9 @@ function App() {
               Submit
             </Button>
           </div>
-          {balance && (
+          {result && (
             <Results
-              balance={balance}
-              address={address}
+              result={result}
             />
           )}
           <Snackbar
